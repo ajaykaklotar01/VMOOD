@@ -68,7 +68,7 @@ h1 {
 
 .vero-item img {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 3 / 4;
   object-fit: cover;
   display: block;
   padding: 4px;
