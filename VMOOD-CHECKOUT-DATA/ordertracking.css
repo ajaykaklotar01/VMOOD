@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  background: #f6f3ee;
+  color: #111111;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* Header */
+header {
+  width: 100%;
+  background: #111111;
+  padding: 18px 24px;
+  border-bottom: 1px solid #252525;
+  text-align: center;
+}
+
+header img {
+  width: 72px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Page */
+main {
+  width: 100%;
+  padding: 30px 20px 44px;
+}
+
+/* Card */
+.tracking-card {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 32px 22px;
+  border: 1px solid #8A9A87;
+  background: #f6f3ee;
+  text-align: center;
+}
+
+/* Text */
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 6px;
+  color: #6F806B;
+  margin: 0 0 14px;
+  font-weight: 600;
+}
+
+.tracking-vero {
+  width: 115px;
+  max-width: 40%;
+  height: auto;
+  display: block;
+  margin: 0 auto 16px;
+}
+
+h1 {
+  font-size: 36px;
+  line-height: 1;
+  margin: 0 0 18px;
+  letter-spacing: 1.3px;
+  white-space: nowrap;
+}
+
+.intro {
+  font-size: 20px;
+  line-height: 1.55;
+  color: #222222;
+  margin: 0 auto 24px;
+  max-width: 430px;
+}
+
+/* Form */
+input {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 14px;
+  background: transparent;
+  border: 1px solid #8A9A87;
+  color: #111111;
+  font-family: inherit;
+  font-size: 18px;
+  text-align: center;
+  outline: none;
+}
+
+input::placeholder {
+  color: #8f8376;
+}
+
+button {
+  width: 100%;
+  padding: 16px;
+  margin-top: 8px;
+  background: #111111;
+  border: 1px solid #111111;
+  color: #f6f3ee;
+  font-family: inherit;
+  font-size: 12px;
+  letter-spacing: 4px;
+  font-weight: 700;
+}
+
+/* Result */
+.result {
+  margin-top: 28px;
+  font-size: 19px;
+  line-height: 1.7;
+  color: #111111;
+}
+
+.success {
+  border-top: 1px solid #8A9A87;
+  padding-top: 26px;
+}
+
+.status {
+  font-size: 20px;
+  color: #6F806B;
+  margin-bottom: 28px;
+}
+
+.error {
+  color: #9b4b4b;
+}
+
+/* Small phone safety */
+@media (max-width: 380px) {
+  main {
+    padding: 24px 14px 40px;
+  }
+
+  .tracking-card {
+    padding: 28px 16px;
+  }
+
+  h1 {
+    font-size: 32px;
+  }
+
+  .intro {
+    font-size: 18px;
+  }
+  }
+
+.result p {
+  margin-bottom: 24px;
+}
+
+.result p:last-child {
+  margin-bottom: 0;
+}
+
+.result strong {
+  font-size: 19px;
+}
+
+
+.home-btn {
+  display: inline-block;
+  margin-top: 28px;
+  padding: 15px 32px;
+  border: 1px solid #8A9A87;
+  color: #111111;
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 4px;
+  font-weight: 700;
+  transition: 0.3s;
+}
+
+.home-btn:hover {
+  background: #111111;
+  color: #f6f3ee;
+  }

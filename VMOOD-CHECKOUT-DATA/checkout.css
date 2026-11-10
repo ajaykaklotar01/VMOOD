@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
+body {
+  margin: 0;
+  background: #F6F3EE;
+  color: #111111;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.checkout-header {
+  background: #111111;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.checkout-logo {
+  width: 58px;
+  height: auto;
+}
+
+.back-top-link {
+  color: #F6F3EE;
+  text-decoration: none;
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
+.checkout-page {
+  padding: 4px 0 30px;
+  text-align: center;
+}
+
+.checkout-page h1 {
+  text-align: center;
+  font-size: 34px;
+  color: #111111;
+  line-height: 1;
+  letter-spacing: 1px;
+  margin: 14px 0 10px;
+  white-space: nowrap;
+}
+
+.checkout-vero {
+  width: 105px;
+  max-width: 42%;
+  display: block;
+  margin: 0 auto -0px;
+}
+
+.order-card,
+.checkout-form {
+  border: 1px solid #111111;
+  padding: 16px 18px;
+  margin: 0 auto 22px;
+  max-width: 520px;
+  background: #fbf8f2;
+  text-align: left;
+}
+
+.order-card h2,
+.checkout-form h2 {
+  text-align: center;
+  margin: 0 0 22px;
+  font-size: 24px;
+  color: #8A9A87;
+  letter-spacing: 1px;
+}
+
+.order-card p {
+  font-size: 20px;
+  margin: 8px 0;
+}
+
+.checkout-form input,
+.checkout-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 16px;
+  margin-bottom: 10px;
+  border: 1px solid #8A9A87;
+  background: transparent;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  color: #111111;
+}
+
+.checkout-form textarea {
+  height: 95px;
+  resize: none;
+}
+
+#continuePayment {
+  width: 100%;
+  padding: 14px;
+  background: #111111;
+  color: #F6F3EE;
+  border: 1px solid #111111;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  white-space: nowrap;
+}
+
+.price-size-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.checkout-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.checkout-popup-box {
+  width: 100%;
+  max-width: 340px;
+  background: #F6F3EE;
+  border: 1px solid #8A9A87;
+  padding: 28px 22px;
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.25);
+}
+
+.checkout-popup-box h3 {
+  margin: 0 0 12px;
+  font-size: 28px;
+  color: #111111;
+  letter-spacing: 1px;
+}
+
+.checkout-popup-box p {
+  font-size: 18px;
+  color: #444444;
+  line-height: 1.5;
+  margin: 0 0 22px;
+}
+
+.checkout-popup-box button {
+  width: 100%;
+  padding: 13px 20px;
+  background: #111111;
+  color: #F6F3EE;
+  border: 1px solid #111111;
+  font-family: inherit;
+  font-size: 12px;
+  letter-spacing: 3px;
+  font-weight: 700;
+}
