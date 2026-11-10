@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VMOOD Product</title>
+  <link rel="stylesheet" href="product.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo">
+    <img src="../VMOODICON.png" alt="VMOOD Logo">
+  </div>
+
+  <nav>
+    <a class="back-top-link" href="#">Back</a>
+  </nav>
+</header>
+
+<section class="product-detail">
+  <h1 class="product-name"></h1>
+  <div class="product-slider">
+    <div class="product-slide-track"></div>
+  </div>
+  <div class="slider-dots"></div>
+  
+  <div class="price-box">
+    <span class="old-price"></span>
+    <span class="new-price"></span>
+    <span class="offer-badge"></span>
+  </div>
+
+  <p class="price-benefits"></p>
+
+  <div class="identity-display">
+  <span class="identity-badge"></span>
+  </div>
+  
+  <div class="size-box">
+    <p>Size</p>
+    <div class="size-options"></div>
+  </div>
+
+  <p class="stock-status"></p>
+  <p class="low-stock"></p>
+  
+  <p class="delivery-estimate"></p>
+
+  <div class="product-description">
+    <h2>Product Information</h2>
+    <div class="product-info-list"></div>
+  </div>
+
+  <p>Care • Comfort • Trust</p>
+
+  <div class="buy-area">
+    <a class="buy-btn" href="javascript:void(0)">BUY NOW</a>
+  </div>
+
+  <div class="product-bottom-nav">
+    <img class="vero-trust" src="VEROTRUST.png" alt="VERO">
+    <a class="back-bottom-link" href="#">
+  BACK TO COLLECTION
+    </a>
+  </div>
+  
+</section>
+
+<div class="vmood-popup" id="vmoodPopup">
+  <div class="vmood-popup-box">
+    <h3 id="popupTitle">Choose Your Option</h3>
+<p id="popupMessage">Select your preferred option to continue.</p>
+    <button type="button" onclick="closeVmoodPopup()">OK</button>
+  </div>
+</div>
+
+<script src="../MEN-PRODUCT/men-catalog.js"></script>
+<script src="../WOMEN-PRODUCT/women-catalog.js"></script>
+<script src="product-details-loader.js"></script>
+</body>
+  </html>
