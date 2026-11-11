@@ -1,4 +1,3 @@
-
 const VMOOD_CATALOG = {
   ...(typeof MEN_CATALOG !== "undefined" ? MEN_CATALOG : {}),
   ...(typeof WOMEN_CATALOG !== "undefined" ? WOMEN_CATALOG : {})
