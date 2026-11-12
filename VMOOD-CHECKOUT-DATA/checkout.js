@@ -44,10 +44,19 @@ document.getElementById("continuePayment").addEventListener("click", () => {
   const state = document.getElementById("customerState").value.trim();
   const pincode = document.getElementById("customerPincode").value.trim();
 
-  if (!productName || !price || !size) {
-  openCheckoutPopup("Product Details Missing", "Please go back and select your product option again.");
-    return;
-  }
+  if (
+  !productName ||
+  !Number.isFinite(price) ||
+  price <= 0 ||
+  !size ||
+  !productSku
+) {
+  openCheckoutPopup(
+    "Product Details Missing",
+    "Please go back and select your product option again."
+  );
+  return;
+}
 
   if (!name || !phone || !address || !city || !state || !pincode) {
      openCheckoutPopup("Delivery Details Required", "Please fill all delivery details correctly before continuing.");
