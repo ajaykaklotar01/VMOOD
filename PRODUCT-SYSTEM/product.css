@@ -386,6 +386,54 @@ h1 {
   color: #F6F3EE;
 }
 
+
+/* QUANTITY SELECTOR */
+
+.quantity-box {
+  margin: 18px auto 16px;
+  text-align: center;
+}
+
+.quantity-box[hidden] {
+  display: none !important;
+}
+
+.quantity-box p {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #444444;
+}
+
+.quantity-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+}
+
+.quantity-controls button {
+  width: 42px;
+  height: 40px;
+  border: 1px solid #8A9A87;
+  background: transparent;
+  color: #111111;
+  font-family: inherit;
+  font-size: 23px;
+  font-weight: 600;
+}
+
+.quantity-controls button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+#quantityValue {
+  min-width: 28px;
+  font-size: 21px;
+  font-weight: 700;
+  color: #111111;
+  }
+
 .vmood-popup {
   position: fixed;
   inset: 0;
