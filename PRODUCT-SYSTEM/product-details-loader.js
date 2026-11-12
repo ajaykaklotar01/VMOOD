@@ -335,7 +335,7 @@ function loadProductImages(folder, imageCount) {
   for (let i = 1; i <= imageCount; i++) {
     const img = document.createElement("img");
 
-    img.src = `${folder}/${i}.png`;
+    img.src = `../${folder.replace(/^\/+/, "")}/${i}.png`;
     img.alt = `Product Image ${i}`;
 
     productTrack.appendChild(img);
