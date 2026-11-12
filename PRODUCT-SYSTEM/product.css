@@ -359,16 +359,16 @@ h1 {
 }
 
 .size-options button {
-  width: 46px;
-  height: 42px;
+  width: 52px;
+  height: 46px;
   border: 1px solid #8A9A87;
   background: transparent;
   color: #111111;
   font-family: 'Cormorant Garamond', serif;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   letter-spacing: 1px;
-}
+  }
 
 .size-options button.sold-out {
   opacity: 0.85;
