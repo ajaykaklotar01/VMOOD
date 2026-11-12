@@ -1,7 +1,11 @@
+
 const VMOOD_API_URL = "https://script.google.com/macros/s/AKfycbwMRO42QQiM1Sva4TKQmArV_ZuGxEwCwVOVA1xvHll97nhv-263-SRSCrcMMURkhESthw/exec";
 
 let selectedSize = "";
 let selectedPrice = null;
+let selectedOldPrice = null;
+let selectedStock = 0;
+let selectedQuantity = 1;
 let product = null;
 
 const params = new URLSearchParams(window.location.search);
@@ -19,7 +23,6 @@ function loadVmoodProduct(sku) {
   }
 
   const script = document.createElement("script");
-
   const callbackName = "vmoodProductCallback";
 
   const timeout = setTimeout(() => {
@@ -52,7 +55,6 @@ function loadVmoodProduct(sku) {
       return;
     }
 
-    // MAP GOOGLE SHEETS FIELDS TO WEBSITE FIELDS
     const data = response.product;
 
     product = {
@@ -108,6 +110,7 @@ function displayProduct(product) {
     product.delivery || "";
 
   // PRODUCT IDENTITY BADGE
+
   const badge = document.querySelector(".identity-badge");
 
   if (badge) {
@@ -131,6 +134,7 @@ function displayProduct(product) {
   }
 
   // BACK NAVIGATION
+
   document.querySelector(".back-top-link").addEventListener("click", (e) => {
     e.preventDefault();
     history.back();
@@ -142,6 +146,7 @@ function displayProduct(product) {
   });
 
   // VARIANT SYSTEM
+
   const sizeBox = document.querySelector(".size-options");
   const buyButton = document.querySelector(".buy-btn");
 
@@ -150,9 +155,11 @@ function displayProduct(product) {
 
   selectedSize = "";
   selectedPrice = null;
+  selectedOldPrice = null;
+  selectedStock = 0;
+  selectedQuantity = 1;
 
   const variants = product.variants;
-
   let availableVariantFound = false;
 
   if (!variants || typeof variants !== "object") {
@@ -169,7 +176,7 @@ function displayProduct(product) {
         Number.isFinite(oldPrice) &&
         Number.isFinite(newPrice) &&
         oldPrice >= 0 &&
-        newPrice >= 0;
+        newPrice > 0;
 
       const btn = document.createElement("button");
       btn.type = "button";
@@ -193,8 +200,12 @@ function displayProduct(product) {
 
         selectedSize = size;
         selectedPrice = newPrice;
+        selectedOldPrice = oldPrice;
+        selectedStock = Math.floor(stock);
+        selectedQuantity = 1;
 
         updateProductPrice(oldPrice, newPrice);
+        updateQuantityDisplay();
 
         buyButton.disabled = false;
       });
@@ -202,43 +213,116 @@ function displayProduct(product) {
       sizeBox.appendChild(btn);
     });
   }
-  
-  if (!availableVariantFound) {
-  document.querySelector(".stock-status").innerText =
-    "All sold out";
 
-  buyButton.disabled = true;
-      }
+  if (!availableVariantFound) {
+    document.querySelector(".stock-status").innerText =
+      "All sold out";
+
+    buyButton.disabled = true;
+  }
+
+  // QUANTITY SYSTEM
+
+  setupQuantitySelector();
 
   // PRODUCT DESCRIPTION
+
   document.querySelector(".product-info-list").innerText =
     product.description || "";
 
   // BUY BUTTON / CHECKOUT
+
   buyButton.addEventListener("click", () => {
     if (
-      selectedSize === "" ||
+      !selectedSize ||
       selectedPrice === null ||
-      !Number.isFinite(selectedPrice)
+      !Number.isFinite(selectedPrice) ||
+      selectedQuantity < 1 ||
+      selectedQuantity > selectedStock
     ) {
       openVmoodPopup(
         "Choose Your Option",
-        "Select your preferred option to continue"
+        "Select your preferred option and quantity to continue."
       );
       return;
     }
+
+    const totalPrice = selectedPrice * selectedQuantity;
 
     localStorage.setItem("vmoodProductName", product.title);
     localStorage.setItem("vmoodProductPrice", selectedPrice);
     localStorage.setItem("vmoodProductSize", selectedSize);
     localStorage.setItem("vmoodProductSku", product.sku);
 
+    localStorage.setItem("vmoodProductQuantity", selectedQuantity);
+    localStorage.setItem("vmoodProductTotal", totalPrice);
+
     window.location.href =
       "../VMOOD-CHECKOUT-DATA/checkout.html";
   });
 
   // PRODUCT IMAGES
+
   loadProductImages(product.folder, product.imageCount);
+}
+
+
+// ==========================================
+// QUANTITY SELECTOR
+// ==========================================
+
+function setupQuantitySelector() {
+  const quantityBox = document.querySelector(".quantity-box");
+  const minusButton = document.getElementById("quantityMinus");
+  const plusButton = document.getElementById("quantityPlus");
+
+  if (!quantityBox || !minusButton || !plusButton) return;
+
+  quantityBox.hidden = true;
+
+  minusButton.addEventListener("click", () => {
+    if (selectedQuantity > 1) {
+      selectedQuantity--;
+      updateQuantityDisplay();
+    }
+  });
+
+  plusButton.addEventListener("click", () => {
+    if (selectedQuantity < selectedStock) {
+      selectedQuantity++;
+      updateQuantityDisplay();
+    }
+  });
+}
+
+
+// ==========================================
+// UPDATE QUANTITY DISPLAY
+// ==========================================
+
+function updateQuantityDisplay() {
+  const quantityBox = document.querySelector(".quantity-box");
+  const quantityValue = document.getElementById("quantityValue");
+  const minusButton = document.getElementById("quantityMinus");
+  const plusButton = document.getElementById("quantityPlus");
+
+  if (!quantityBox || !quantityValue || !minusButton || !plusButton) {
+    return;
+  }
+
+  if (!selectedSize || selectedStock < 1) {
+    quantityBox.hidden = true;
+    return;
+  }
+
+  quantityBox.hidden = false;
+
+  quantityValue.innerText = selectedQuantity;
+
+  minusButton.disabled = selectedQuantity <= 1;
+  plusButton.disabled = selectedQuantity >= selectedStock;
+
+  updateProductPrice(selectedOldPrice, selectedPrice);
 }
 
 
@@ -252,20 +336,23 @@ function updateProductPrice(oldPrice, newPrice) {
   const offerBadge = document.querySelector(".offer-badge");
   const priceBenefits = document.querySelector(".price-benefits");
 
-  oldPriceElement.innerText = "₹" + oldPrice;
-  newPriceElement.innerText = "₹" + newPrice;
+  const totalPrice = newPrice * selectedQuantity;
+  const totalOldPrice = oldPrice * selectedQuantity;
+
+  oldPriceElement.innerText = "₹" + totalOldPrice;
+  newPriceElement.innerText = "₹" + totalPrice;
 
   const discount = oldPrice > 0
     ? Math.round(((oldPrice - newPrice) / oldPrice) * 100)
     : 0;
 
-  const saving = oldPrice - newPrice;
+  const saving = (oldPrice - newPrice) * selectedQuantity;
 
   offerBadge.innerText =
     discount > 0 ? `${discount}% OFF` : "";
 
   priceBenefits.innerText =
-    `You Save ₹${saving} • Shipping Included`;
+    `₹${newPrice} × ${selectedQuantity} • You Save ₹${saving} • Shipping Included`;
 }
 
 
