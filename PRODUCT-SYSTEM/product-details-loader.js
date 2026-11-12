@@ -104,9 +104,6 @@ function displayProduct(product) {
   document.querySelector(".price-benefits").innerText =
     "Select your preferred option to see the price";
 
-  document.querySelector(".stock-status").innerText =
-    "Select an option to check availability";
-
   document.querySelector(".delivery-estimate").innerText =
     product.delivery || "";
 
@@ -199,22 +196,19 @@ function displayProduct(product) {
 
         updateProductPrice(oldPrice, newPrice);
 
-        document.querySelector(".stock-status").innerText =
-          "Available";
-
         buyButton.disabled = false;
       });
 
       sizeBox.appendChild(btn);
     });
   }
-
+  
   if (!availableVariantFound) {
-    document.querySelector(".stock-status").innerText =
-      "Currently sold out";
+  document.querySelector(".stock-status").innerText =
+    "All sold out";
 
-    buyButton.disabled = true;
-  }
+  buyButton.disabled = true;
+      }
 
   // PRODUCT DESCRIPTION
   document.querySelector(".product-info-list").innerText =
