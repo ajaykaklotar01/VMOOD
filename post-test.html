@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VMOOD POST Test</title>
+</head>
+<body>
+  <h2>VMOOD Browser Connection Test</h2>
+
+  <button onclick="testConnection()">TEST POST CONNECTION</button>
+
+  <pre id="result">Waiting for test...</pre>
+
+  <script>
+    async function testConnection() {
+      const result = document.getElementById("result");
+      result.textContent = "Connecting...";
+
+      const url = "https://script.google.com/macros/s/AKfycbwMRO42QQiM1Sva4TKQmArV_ZuGxEwCwVOVA1xvHll97nhv-263-SRSCrcMMURkhESthw/exec";
+
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "text/plain"
+          },
+          body: JSON.stringify({
+            action: "PING"
+          })
+        });
+
+        const data = await response.json();
+
+        result.textContent =
+          "HTTP STATUS: " + response.status +
+          "\nRESPONSE: " + JSON.stringify(data);
+
+      } catch (error) {
+        result.textContent =
+          "BROWSER CONNECTION ERROR:\n" + error.message;
+      }
+    }
+  </script>
+</body>
+</html>
