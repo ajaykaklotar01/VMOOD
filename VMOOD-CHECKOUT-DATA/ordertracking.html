@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="ordertracking.css">
 </head>
 <body>
-
   <header>
     <img src="../VMOODICON.png" alt="VMOOD Logo">
   </header>
@@ -16,18 +15,16 @@
     <section class="tracking-card">
       <p class="eyebrow">VMOOD ORDER</p>
       <img src="VEROSUPPORT.png" class="tracking-vero" alt="VERO">
-      <h1>Order Tracking</h1> 
+      <h1>Order Tracking</h1>
       <p class="intro">Enter your Order ID and mobile number to track your VMOOD order.</p>
       <input type="text" id="orderId" placeholder="Order ID">
-      <input type="tel" id="phone" placeholder="Mobile Number">
-
-      <button onclick="trackOrder()">TRACK ORDER</button>
+      <input type="tel" id="phone" placeholder="Mobile Number" maxlength="10" inputmode="numeric">
+      <button type="button" onclick="trackOrder()">TRACK ORDER</button>
       <div id="result" class="result"></div>
       <a href="../index.html" class="home-btn">RETURN TO HOME</a>
     </section>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="ordertracking.js?v=5"></script>
+  <script src="ordertracking.js?v=6"></script>
 </body>
-  </html>
+</html>
