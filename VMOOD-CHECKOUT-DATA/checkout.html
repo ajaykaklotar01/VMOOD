@@ -7,33 +7,28 @@
   <link rel="stylesheet" href="checkout.css">
 </head>
 <body>
-
 <header class="checkout-header">
   <img src="../VMOODICON.png" alt="VMOOD Logo" class="checkout-logo">
   <a class="back-top-link" href="#">Back</a>
 </header>
 
 <section class="checkout-page">
-
   <h1>VMOOD CHECKOUT</h1>
-
   <img class="checkout-vero" src="VEROSUPPORT.png" alt="VMOOD Checkout">
 
   <div class="order-card">
-  <h2>Order Summary</h2>
-
-  <p>Product: <span id="checkoutProduct"></span></p>
-
-  <div class="price-size-row">
-    <p>Price: <span id="checkoutPrice"></span></p>
-    <p>Size: <span id="checkoutSize"></span></p>
-  </div>
-
+    <h2>Order Summary</h2>
+    <p>Product: <span id="checkoutProduct"></span></p>
+    <div class="price-size-row">
+      <p>Price: <span id="checkoutPrice"></span></p>
+      <p>Size: <span id="checkoutSize"></span></p>
+    </div>
+    <p>Quantity: <span id="checkoutQuantity"></span></p>
+    <p>Total: <span id="checkoutTotal"></span></p>
   </div>
 
   <form class="checkout-form">
     <h2>Delivery Details</h2>
-
     <input type="text" id="customerName" placeholder="Full Name" required>
     <input type="tel" id="customerPhone" placeholder="Mobile Number" maxlength="10" inputmode="numeric" pattern="[0-9]*" required>
     <input type="email" id="customerEmail" placeholder="Email Address">
@@ -41,22 +36,19 @@
     <input type="text" id="customerCity" placeholder="City" required>
     <input type="text" id="customerState" placeholder="State" required>
     <input type="text" id="customerPincode" placeholder="Pincode" maxlength="6" inputmode="numeric" pattern="[0-9]*" required>
-
     <button type="button" id="continuePayment">CONTINUE TO PAYMENT</button>
   </form>
-
 </section>
+
 <div class="checkout-popup" id="checkoutPopup">
   <div class="checkout-popup-box">
     <h3 id="checkoutPopupTitle">VMOOD Notice</h3>
     <p id="checkoutPopupMessage">Please check your details.</p>
     <button type="button" onclick="closeCheckoutPopup()">OK</button>
   </div>
-    </div>
-  
+</div>
+
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="checkout.js"></script>
-  
+<script src="checkout.js?v=2"></script>
 </body>
 </html>
