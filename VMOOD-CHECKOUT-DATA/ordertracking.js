@@ -80,6 +80,9 @@ async function trackOrder() {
     addLine("Size", order.size);
     addLine("Payment Status", order.paymentStatus || "PAID");
     addLine("Delivery Status", order.deliveryStatus || "PROCESSING");
+    if (order.paymentMessage) {
+      addLine("Payment Note", order.paymentMessage);
+    }
 
     result.appendChild(card);
 
