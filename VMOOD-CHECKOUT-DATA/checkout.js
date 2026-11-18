@@ -223,6 +223,7 @@ document.getElementById("continuePayment").addEventListener("click", async funct
     const razorpay = new Razorpay(options);
 
     razorpay.on("payment.failed", async function() {
+      razorpay.close();
       // Release this reservation only after the server checks Razorpay.
       paymentHandlerStarted = true;
       button.innerText = "CHECKING PAYMENT...";
