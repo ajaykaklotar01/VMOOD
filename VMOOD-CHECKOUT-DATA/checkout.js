@@ -1,6 +1,6 @@
 // VMOOD SECURE CHECKOUT
 // The Apps Script URL will be added after the final deployment.
-const VMOOD_API_URL = "PASTE_NEW_APPS_SCRIPT_EXEC_URL_HERE";
+const VMOOD_API_URL = "https://script.google.com/macros/s/AKfycbxYD0NSy7bcNlWRutvt4zgQWL8_lRbC1wSW_KgqkiyzK6Dd3mGn3uq1ODB6rqFs_ndcVA/exec";
 
 let checkoutProcessing = false;
 let paymentHandlerStarted = false;
