@@ -207,7 +207,7 @@ document.getElementById("continuePayment").addEventListener("click", async funct
                 razorpay_order_id: activeRazorpayOrderId
               });
             } catch (error) {
-              // The reservation will expire automatically after its 15-minute window.
+              // The reservation will expire automatically after its 10-minute window.
             }
           }
 
@@ -222,11 +222,44 @@ document.getElementById("continuePayment").addEventListener("click", async funct
 
     const razorpay = new Razorpay(options);
 
-    razorpay.on("payment.failed", function() {
-      openCheckoutPopup(
-        "Payment Not Completed",
-        "The payment was not completed. You can try again. If money was deducted, please do not pay again until the payment is checked."
-      );
+    razorpay.on("payment.failed", async function() {
+      // Release this reservation only after the server checks Razorpay.
+      paymentHandlerStarted = true;
+      button.innerText = "CHECKING PAYMENT...";
+
+      try {
+        const released = await vmoodApiRequest({
+          action: "CANCEL_ORDER",
+          razorpay_order_id: activeRazorpayOrderId
+        });
+
+        if (released.paymentDetected) {
+          button.disabled = true;
+          button.innerText = "PAYMENT CHECK PENDING";
+          openCheckoutPopup(
+            "Payment Check Required",
+            "Razorpay shows a payment that needs verification. Please do not pay again. VMOOD will check the payment before confirming your order."
+          );
+          return;
+        }
+
+        checkoutProcessing = false;
+        button.disabled = false;
+        button.innerText = "CONTINUE TO PAYMENT";
+        activeRazorpayOrderId = "";
+        openCheckoutPopup(
+          "Payment Not Completed",
+          "No successful payment was found. No order was created and no stock was deducted. You can start a fresh checkout when ready."
+        );
+
+      } catch (error) {
+        button.disabled = true;
+        button.innerText = "PAYMENT CHECK PENDING";
+        openCheckoutPopup(
+          "Payment Check Pending",
+          "We could not safely confirm the payment status. Please do not pay again until VMOOD checks it."
+        );
+      }
     });
 
     razorpay.open();
