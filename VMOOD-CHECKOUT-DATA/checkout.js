@@ -4,7 +4,6 @@ const VMOOD_API_URL = "https://script.google.com/macros/s/AKfycbxYD0NSy7bcNlWRut
 
 let checkoutProcessing = false;
 let paymentHandlerStarted = false;
-let activeRazorpayOrderId = "";
 
 function openCheckoutPopup(title, message) {
   document.getElementById("checkoutPopupTitle").innerText = title;
@@ -146,7 +145,6 @@ document.getElementById("continuePayment").addEventListener("click", async funct
       throw new Error(created.message || "Unable to create your payment order.");
     }
 
-    activeRazorpayOrderId = created.razorpayOrderId;
     paymentHandlerStarted = false;
 
     const options = {
@@ -181,8 +179,6 @@ document.getElementById("continuePayment").addEventListener("click", async funct
 
           localStorage.setItem("vmoodCustomerName", name);
           localStorage.setItem("vmoodOrderId", verified.orderId || "VMOOD");
-          localStorage.setItem("vmoodRazorpayOrderId", paymentResponse.razorpay_order_id);
-          localStorage.setItem("vmoodOrderStatus", verified.orderStatus || "PAID");
           localStorage.setItem("vmoodPaymentStatus", "PAID");
           localStorage.setItem("vmoodPaymentMessage", verified.message || "Payment successful.");
 
@@ -218,7 +214,6 @@ document.getElementById("continuePayment").addEventListener("click", async funct
       checkoutProcessing = false;
       button.disabled = false;
       button.innerText = "CONTINUE TO PAYMENT";
-      activeRazorpayOrderId = "";
       openCheckoutPopup(
         "Payment Not Completed",
         "Razorpay did not confirm a successful payment. If money was deducted from your account, do not try payment again yet; contact VMOOD with your payment details."
