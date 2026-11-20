@@ -200,7 +200,7 @@ document.getElementById("continuePayment").addEventListener("click", async funct
 
       modal: {
         ondismiss: function() {
-          // No reservation exists to cancel. Closing Checkout leaves the order PENDING.
+          // No Google Sheets order exists yet. Closing Checkout leaves Google Sheets unchanged.
           if (!paymentHandlerStarted) {
             checkoutProcessing = false;
             button.disabled = false;
