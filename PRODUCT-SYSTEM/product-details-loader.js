@@ -172,7 +172,7 @@ function displayProduct(product) {
 
       const validVariant =
         Number.isFinite(stock) &&
-        stock > 0 &&
+        stock > 3 &&
         Number.isFinite(oldPrice) &&
         Number.isFinite(newPrice) &&
         oldPrice >= 0 &&
@@ -216,7 +216,7 @@ function displayProduct(product) {
 
   if (!availableVariantFound) {
     document.querySelector(".stock-status").innerText =
-      "All sold out";
+      "Currently unavailable";
 
     buyButton.disabled = true;
   }
