@@ -171,7 +171,7 @@ function displayProduct(product) {
       const newPrice = Number(data.newPrice);
 
       const validVariant =
-        Number.isFinite(stock) &&
+        Number.isSafeInteger(stock) &&
         stock > 3 &&
         Number.isFinite(oldPrice) &&
         Number.isFinite(newPrice) &&
@@ -201,7 +201,7 @@ function displayProduct(product) {
         selectedSize = size;
         selectedPrice = newPrice;
         selectedOldPrice = oldPrice;
-        selectedStock = Math.floor(stock);
+        selectedStock = stock - 3;
         selectedQuantity = 1;
 
         updateProductPrice(oldPrice, newPrice);
@@ -247,15 +247,12 @@ function displayProduct(product) {
       return;
     }
 
-    const totalPrice = selectedPrice * selectedQuantity;
-
     localStorage.setItem("vmoodProductName", product.title);
     localStorage.setItem("vmoodProductPrice", selectedPrice);
     localStorage.setItem("vmoodProductSize", selectedSize);
     localStorage.setItem("vmoodProductSku", product.sku);
 
     localStorage.setItem("vmoodProductQuantity", selectedQuantity);
-    localStorage.setItem("vmoodProductTotal", totalPrice);
 
     window.location.href =
       "../VMOOD-CHECKOUT-DATA/checkout.html";
