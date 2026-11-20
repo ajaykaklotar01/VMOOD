@@ -105,9 +105,9 @@ function loadCollectionProduct(card) {
       return;
     }
 
-    // Prefer an in-stock variant for the collection price.
+    // Prefer a purchasable variant (more than 3 units) for the collection price.
     const availablePrices = validPrices.filter(
-      (variant) => variant.stock > 0
+      (variant) => variant.stock > 3
     );
 
     const priceList = availablePrices.length > 0
