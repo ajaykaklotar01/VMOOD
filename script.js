@@ -7,7 +7,7 @@ function startHomepageSlideshow(trackSelector) {
     setInterval(() => {
       currentSlide++;
 
-      track.style.transition = "transform 0.5s ease-in-out";
+      track.style.transition = "transform 1s ease-in-out";
       track.style.transform = `translateX(-${currentSlide * 100}%)`;
 
       if (currentSlide === totalSlides - 1) {
