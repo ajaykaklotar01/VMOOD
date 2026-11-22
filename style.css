@@ -738,6 +738,14 @@ body.ivory-home-theme .home-product-card {
   background: #FBF9F5;
   border: 1px solid #DED8CE;
 }
+/* Subtle top/bottom framing for homepage product photos only. */
+body.ivory-home-theme .home-product-card .card-img {
+  border-top: 1px solid #625E57;
+  border-bottom: 1px solid #625E57;
+  border-left: 0;
+  border-right: 0;
+  box-sizing: border-box;
+}
 body.ivory-home-theme .home-product-card h3,
 body.ivory-home-theme .home-product-card .card-price {
   color: #111111;
