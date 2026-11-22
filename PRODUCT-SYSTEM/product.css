@@ -359,8 +359,10 @@ h1 {
 }
 
 .size-options button {
-  width: 52px;
+  width: auto;
+  min-width: 64px;
   height: 46px;
+  padding: 0 12px;
   border: 1px solid #8A9A87;
   background: transparent;
   color: #111111;
@@ -368,7 +370,9 @@ h1 {
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 1px;
-  }
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
 
 .size-options button.sold-out {
   opacity: 0.85;
