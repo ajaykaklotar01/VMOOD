@@ -33,6 +33,7 @@ async function trackOrder() {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 20000);
     let response;
+    let text;
 
     try {
       response = await fetch(VMOOD_API_URL, {
@@ -45,6 +46,7 @@ async function trackOrder() {
         }),
         signal: controller.signal
       });
+      text = await response.text();
     } catch (error) {
       if (error.name === "AbortError") {
         throw new Error("Order tracking took too long. Please check your connection and try again.");
@@ -53,8 +55,6 @@ async function trackOrder() {
     } finally {
       clearTimeout(timeout);
     }
-
-    const text = await response.text();
     let data;
 
     try {
