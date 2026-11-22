@@ -4,6 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VMOOD | Real Luxury</title>
+  <script>
+    // Show the existing V1 intro before the first page paint to prevent a homepage flash.
+    (function () {
+      const navigation = performance.getEntriesByType("navigation")[0];
+      const isRefresh = navigation && navigation.type === "reload";
+      const referrer = document.referrer;
+      let cameFromInternalPage = false;
+
+      if (referrer) {
+        try {
+          const previousUrl = new URL(referrer);
+          cameFromInternalPage =
+            previousUrl.origin === window.location.origin &&
+            previousUrl.pathname !== window.location.pathname;
+        } catch (error) {
+          cameFromInternalPage = false;
+        }
+      }
+
+      if (!cameFromInternalPage || isRefresh) {
+        document.documentElement.classList.add("vmood-intro-pending");
+      }
+    })();
+  </script>
   <link rel="stylesheet" href="style.css">
 </head>
   
