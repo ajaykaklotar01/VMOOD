@@ -54,30 +54,6 @@
   <a class="back-btn" href="../index.html">BACK TO HOME</a>
 </section>
 
-<script>
-(() => {
-  const track = document.querySelector(".why-gallery");
-  if (!track) return;
-  const first = track.querySelector("img");
-  track.appendChild(first.cloneNode(true));
-  const count = track.querySelectorAll("img").length - 1;
-  let index = 0;
-  let resetting = false;
-  track.addEventListener("transitionend", (event) => {
-    if (event.propertyName !== "transform" || !resetting) return;
-    track.style.transition = "none";
-    track.style.transform = "translateX(0)";
-    index = 0;
-    resetting = false;
-  });
-  setInterval(() => {
-    if (resetting) return;
-    index++;
-    track.style.transition = "transform 1s ease-in-out";
-    track.style.transform = `translateX(-${index * 100}%)`;
-    if (index === count) resetting = true;
-  }, 3000);
-})();
-</script>
+
 </body>
 </html>
