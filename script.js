@@ -105,7 +105,7 @@ if (vmoodIntro) {
         if (headerLogo) {
           setTimeout(() => {
             headerLogo.classList.add("vmood-logo-reveal");
-          }, 1000);
+          }, 700);
         }
       }, 600);
 
