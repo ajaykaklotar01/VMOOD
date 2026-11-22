@@ -86,7 +86,10 @@ if (vmoodIntro) {
     new URL(document.referrer).origin === window.location.origin &&
     new URL(document.referrer).pathname !== window.location.pathname;
 
-  if (!cameFromInternalPage || isRefresh) {
+  const shouldPlayIntro = !cameFromInternalPage || isRefresh;
+  const headerLogo = document.querySelector(".site-header .logo");
+
+  if (shouldPlayIntro) {
 
     vmoodIntro.hidden = false;
 
@@ -97,10 +100,18 @@ if (vmoodIntro) {
         vmoodIntro.hidden = true;
         vmoodIntro.classList.remove("intro-exit");
         document.documentElement.classList.remove("vmood-intro-pending");
+
+        // Reveal the centered header logo only after the V1 overlay has fully faded.
+        if (headerLogo) {
+          headerLogo.classList.add("vmood-logo-reveal");
+        }
       }, 600);
 
     }, 1800);
 
+  } else if (headerLogo) {
+    // Internal return: V1 is skipped, so reveal the header logo on its own.
+    headerLogo.classList.add("vmood-logo-reveal");
   }
 }
 
