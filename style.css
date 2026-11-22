@@ -725,13 +725,14 @@ body.ivory-home-theme .eyebrow {
 body.ivory-home-theme .buttons a,
 body.ivory-home-theme .section-btn,
 body.ivory-home-theme .home-product-card .card-link {
-  background: #A3B09D;
+  background: #ADB9A9;
   color: #111111;
-  border: 1px solid #A3B09D;
+  border: 1px solid #625E57;
 }
 body.ivory-home-theme .buttons a:first-child {
-  background: #A3B09D;
+  background: #ADB9A9;
   color: #111111;
+  border: 1px solid #625E57;
 }
 body.ivory-home-theme .home-product-card {
   background: #FBF9F5;
