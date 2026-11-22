@@ -30,15 +30,29 @@ async function trackOrder() {
   button.textContent = "CHECKING...";
 
   try {
-    const response = await fetch(VMOOD_API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify({
-        action: "TRACK_ORDER",
-        orderId: orderId,
-        phone: phone
-      })
-    });
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 20000);
+    let response;
+
+    try {
+      response = await fetch(VMOOD_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({
+          action: "TRACK_ORDER",
+          orderId: orderId,
+          phone: phone
+        }),
+        signal: controller.signal
+      });
+    } catch (error) {
+      if (error.name === "AbortError") {
+        throw new Error("Order tracking took too long. Please check your connection and try again.");
+      }
+      throw error;
+    } finally {
+      clearTimeout(timeout);
+    }
 
     const text = await response.text();
     let data;
