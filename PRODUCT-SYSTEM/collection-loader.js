@@ -66,19 +66,26 @@ function loadCollectionProduct(card) {
     const colorHex = data["Color HEX"];
 
     const imageCount = Number(data["Image Count"]);
+    const returnedSku = String(data["SKU"] || "").trim().toUpperCase();
+    const safeFolder = String(folder || "").replace(/^\/+|\/+$/g, "");
+    const folderMatch = safeFolder.match(/^(MEN|WOMEN)-PRODUCT\/(MP|WP)\d+$/i);
 
     // Check essential product information.
     if (
       !title ||
-      !folder ||
+      returnedSku !== id ||
+      !folderMatch ||
+      folderMatch[2].toUpperCase() !== id.slice(0, 2) ||
       !colorName ||
       !/^#[0-9A-Fa-f]{6}$/.test(colorHex || "") ||
-      !Number.isFinite(imageCount) ||
+      !Number.isSafeInteger(imageCount) ||
       imageCount < 1 ||
+      imageCount > 12 ||
       !data["Description"] ||
       !data["Delivery"] ||
       !variants ||
-      typeof variants !== "object"
+      typeof variants !== "object" ||
+      Array.isArray(variants)
     ) {
       card.style.display = "none";
       return;
@@ -86,6 +93,7 @@ function loadCollectionProduct(card) {
 
     // Find the lowest-priced valid variant.
     const validPrices = Object.values(variants)
+      .filter((variant) => variant && typeof variant === "object")
       .map((variant) => ({
         oldPrice: Number(variant.oldPrice),
         newPrice: Number(variant.newPrice),
@@ -94,9 +102,9 @@ function loadCollectionProduct(card) {
       .filter((variant) =>
         Number.isFinite(variant.oldPrice) &&
         Number.isFinite(variant.newPrice) &&
-        Number.isFinite(variant.stock) &&
+        Number.isSafeInteger(variant.stock) &&
         variant.oldPrice >= 0 &&
-        variant.newPrice >= 0 &&
+        variant.newPrice > 0 &&
         variant.stock >= 0
       );
 
@@ -125,7 +133,7 @@ function loadCollectionProduct(card) {
     const prefix = isCollectionPage ? "../" : "";
 
     const imagePath =
-      prefix + folder.replace(/^\/+/, "") + "/1.png";
+      prefix + safeFolder + "/1.png";
 
     const productPage = isCollectionPage
       ? "../PRODUCT-SYSTEM/product-details.html"
