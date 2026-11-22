@@ -1,5 +1,5 @@
 
-const VMOOD_API_URL = "https://script.google.com/macros/s/AKfycbwMRO42QQiM1Sva4TKQmArV_ZuGxEwCwVOVA1xvHll97nhv-263-SRSCrcMMURkhESthw/exec";
+const VMOOD_API_URL = "https://script.google.com/macros/s/AKfycbxYD0NSy7bcNlWRutvt4zgQWL8_lRbC1wSW_KgqkiyzK6Dd3mGn3uq1ODB6rqFs_ndcVA/exec";
 
 let selectedSize = "";
 let selectedPrice = null;
