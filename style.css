@@ -39,6 +39,11 @@ body {
 }
 
 /* Smooth opacity-only header-logo reveal after the V1 intro and pause. */
+/* Keep the homepage header logo completely invisible until its reveal begins. */
+body.ivory-home-theme .site-header .logo img {
+  opacity: 0;
+}
+
 .site-header .logo.vmood-logo-reveal img {
   animation: vmoodHeaderLogoReveal 3.5s ease-in-out both;
 }
