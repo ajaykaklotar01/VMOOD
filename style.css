@@ -414,6 +414,11 @@ section.show,
   display: none !important;
 }
 
+/* Early V1 intro visibility prevents the homepage appearing before script.js runs. */
+html.vmood-intro-pending #vmoodIntro {
+  display: flex !important;
+}
+
 #vmoodIntro img {
   width: 110px;
   height: auto;
