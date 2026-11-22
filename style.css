@@ -38,32 +38,17 @@ body {
   transform: translateY(5px);
 }
 
-/* Slow, clean header-logo fade after the V1 full-screen intro. */
+/* Smooth opacity-only header-logo reveal after the V1 intro and pause. */
 .site-header .logo.vmood-logo-reveal img {
-  animation: vmoodHeaderLogoReveal 3.5s linear both;
+  animation: vmoodHeaderLogoReveal 3.5s ease-in-out both;
 }
 
 @keyframes vmoodHeaderLogoReveal {
-  0% {
-    opacity: 0;
-    transform: translateY(5px);
-  }
-  20% {
-    opacity: 0.2;
-    transform: translateY(5px);
-  }
-  50% {
-    opacity: 0.5;
-    transform: translateY(5px);
-  }
-  80% {
-    opacity: 0.8;
-    transform: translateY(5px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(5px);
-  }
+  0%   { opacity: 0; }
+  20%  { opacity: 0.2; }
+  50%  { opacity: 0.5; }
+  80%  { opacity: 0.8; }
+  100% { opacity: 1; }
 }
 
 nav a {
