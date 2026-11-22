@@ -101,9 +101,11 @@ if (vmoodIntro) {
         vmoodIntro.classList.remove("intro-exit");
         document.documentElement.classList.remove("vmood-intro-pending");
 
-        // Reveal the centered header logo only after the V1 overlay has fully faded.
+        // Let the V1 overlay finish, pause for 0.5s, then reveal the header logo.
         if (headerLogo) {
-          headerLogo.classList.add("vmood-logo-reveal");
+          setTimeout(() => {
+            headerLogo.classList.add("vmood-logo-reveal");
+          }, 500);
         }
       }, 600);
 
