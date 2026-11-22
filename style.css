@@ -45,7 +45,7 @@ body.ivory-home-theme .site-header .logo img {
 }
 
 .site-header .logo.vmood-logo-reveal img {
-  animation: vmoodHeaderLogoReveal 3.5s ease-in-out both;
+  animation: vmoodHeaderLogoReveal 3s ease-in-out both;
 }
 
 @keyframes vmoodHeaderLogoReveal {
