@@ -20,11 +20,25 @@ async function vmoodApiRequest(payload) {
     throw new Error("VMOOD checkout is not connected yet. Please try again later.");
   }
 
-  const response = await fetch(VMOOD_API_URL, {
-    method: "POST",
-    headers: { "Content-Type": "text/plain;charset=utf-8" },
-    body: JSON.stringify(payload)
-  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 20000);
+  let response;
+
+  try {
+    response = await fetch(VMOOD_API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload),
+      signal: controller.signal
+    });
+  } catch (error) {
+    if (error.name === "AbortError") {
+      throw new Error("The VMOOD server took too long to respond. Please check your connection and try again.");
+    }
+    throw error;
+  } finally {
+    clearTimeout(timeout);
+  }
 
   const text = await response.text();
   let data;
@@ -122,6 +136,13 @@ document.getElementById("continuePayment").addEventListener("click", async funct
     return;
   }
 
+  // A new checkout attempt must not reuse an earlier order's success details.
+  sessionStorage.removeItem("vmoodPaymentVerifiedThisSession");
+  localStorage.removeItem("vmoodCustomerName");
+  localStorage.removeItem("vmoodOrderId");
+  localStorage.removeItem("vmoodPaymentStatus");
+  localStorage.removeItem("vmoodPaymentMessage");
+
   checkoutProcessing = true;
   button.disabled = true;
   button.innerText = "PLEASE WAIT...";
@@ -181,6 +202,7 @@ document.getElementById("continuePayment").addEventListener("click", async funct
           localStorage.setItem("vmoodOrderId", verified.orderId || "VMOOD");
           localStorage.setItem("vmoodPaymentStatus", "PAID");
           localStorage.setItem("vmoodPaymentMessage", verified.message || "Payment successful.");
+          sessionStorage.setItem("vmoodPaymentVerifiedThisSession", "true");
 
           window.location.href = "thankyou.html";
         } catch (error) {
