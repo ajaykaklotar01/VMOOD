@@ -1,21 +1,41 @@
-// HOMEPAGE SLIDESHOWS — 3 SECONDS PER PHOTO, 0.5 SECOND TRANSITION
+// HOMEPAGE SLIDESHOWS — SEAMLESS INFINITE LOOP
 function startHomepageSlideshow(trackSelector) {
   document.querySelectorAll(trackSelector).forEach((track) => {
-    const totalSlides = track.querySelectorAll("img").length;
+    const firstSlide = track.querySelector("img");
+    if (!firstSlide) return;
+
+    // Add one matching first-slide clone only when the HTML does not already have one.
+    const slides = Array.from(track.querySelectorAll("img"));
+    const firstSrc = firstSlide.getAttribute("src");
+    const lastSrc = slides[slides.length - 1].getAttribute("src");
+
+    if (lastSrc !== firstSrc) {
+      track.appendChild(firstSlide.cloneNode(true));
+    }
+
+    const originalSlideCount = track.querySelectorAll("img").length - 1;
     let currentSlide = 0;
+    let isResetting = false;
+
+    track.addEventListener("transitionend", (event) => {
+      if (event.propertyName !== "transform" || !isResetting) return;
+
+      // The final clone is identical to slide 1, so this reset is visually invisible.
+      track.style.transition = "none";
+      track.style.transform = "translateX(0)";
+      currentSlide = 0;
+      isResetting = false;
+    });
 
     setInterval(() => {
-      currentSlide++;
+      if (isResetting) return;
 
+      currentSlide++;
       track.style.transition = "transform 1s ease-in-out";
       track.style.transform = `translateX(-${currentSlide * 100}%)`;
 
-      if (currentSlide === totalSlides - 1) {
-        setTimeout(() => {
-          track.style.transition = "none";
-          track.style.transform = "translateX(0)";
-          currentSlide = 0;
-        }, 500);
+      if (currentSlide === originalSlideCount) {
+        isResetting = true;
       }
     }, 3000);
   });
