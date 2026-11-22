@@ -40,14 +40,6 @@ nav a {
   text-align: center;
 }
 
-.eyebrow {
-  font-size: 12px;
-  letter-spacing: 6px;
-  color: #8A9A87;
-  margin: 0 0 14px;
-  font-weight: 700;
-}
-
 h1 {
   font-size: 24px;
   line-height: 1.05;
@@ -63,9 +55,6 @@ h1 {
   letter-spacing: 3px;
   font-weight: 700;
   min-width: 190px;
-}
-
-.back-btn {
   border: 1px solid #f6f3ee;
   color: #f6f3ee;
 }
