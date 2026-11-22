@@ -96,6 +96,7 @@ if (vmoodIntro) {
       setTimeout(() => {
         vmoodIntro.hidden = true;
         vmoodIntro.classList.remove("intro-exit");
+        document.documentElement.classList.remove("vmood-intro-pending");
       }, 600);
 
     }, 1800);
