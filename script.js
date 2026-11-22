@@ -47,7 +47,7 @@ startHomepageSlideshow(".why-track");
 
 // PREMIUM SCROLL ANIMATION
 const revealElements = document.querySelectorAll(
-  "section, .product-card, .info-card, .review-card"
+  "section, .review-card"
 );
 
 const revealObserver = new IntersectionObserver((entries) => {
