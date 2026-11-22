@@ -50,7 +50,7 @@ body.ivory-home-theme .site-header .logo img {
 
 @keyframes vmoodHeaderLogoReveal {
   0%   { opacity: 0; }
-  20%  { opacity: 0.2; }
+  30%  { opacity: 0.3; }
   50%  { opacity: 0.5; }
   80%  { opacity: 0.8; }
   100% { opacity: 1; }
