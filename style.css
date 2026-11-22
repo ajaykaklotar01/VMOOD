@@ -488,9 +488,10 @@ html.vmood-intro-pending #vmoodIntro {
 }
 
 .policy-page p {
-  color: #333333;
+  color: #1F1F1F;
   font-size: 18px;
   line-height: 1.75;
+  font-weight: 500;
 }
 
 .policy-page .section-btn {
@@ -814,7 +815,7 @@ body.ivory-home-theme .footer-social-links a,
 body.ivory-home-theme .footer-action-links a,
 body.ivory-home-theme .footer-location,
 body.ivory-home-theme .footer-copy {
-  color: #33302B;
+  color: #1F1F1F;
 }
 body.ivory-home-theme .side-menu {
   background: #F6F3EE;
