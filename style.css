@@ -738,8 +738,15 @@ body.ivory-home-theme .home-product-card {
   background: #FBF9F5;
   border: 1px solid #DED8CE;
 }
-/* Subtle top/bottom framing for homepage product photos only. */
-body.ivory-home-theme .home-product-card .card-img {
+/* Keep homepage product-card photos free of added framing. */
+body.ivory-home-theme .home-product-card img {
+  border: 0;
+}
+
+/* Soft charcoal framing only on the three homepage feature sliders. */
+body.ivory-home-theme .hero-slider,
+body.ivory-home-theme .world-slider,
+body.ivory-home-theme .why-slider {
   border-top: 1px solid #625E57;
   border-bottom: 1px solid #625E57;
   border-left: 0;
