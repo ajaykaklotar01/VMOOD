@@ -56,6 +56,25 @@ function loadVmoodProduct(sku) {
     }
 
     const data = response.product;
+    const returnedSku = String(data["SKU"] || "").trim().toUpperCase();
+    const folder = String(data["Image Folder"] || "").replace(/^\/+|\/+$/g, "");
+    const folderMatch = folder.match(/^(MEN|WOMEN)-PRODUCT\/(MP|WP)\d+$/i);
+    const imageCount = Number(data["Image Count"]);
+
+    if (
+      returnedSku !== sku.toUpperCase() ||
+      !folderMatch ||
+      folderMatch[2].toUpperCase() !== returnedSku.slice(0, 2) ||
+      !Number.isSafeInteger(imageCount) ||
+      imageCount < 1 ||
+      imageCount > 12 ||
+      !data.variants ||
+      typeof data.variants !== "object" ||
+      Array.isArray(data.variants)
+    ) {
+      showProductError("Product Unavailable", "The product information is incomplete or invalid. Please try again later.");
+      return;
+    }
 
     product = {
       sku: data["SKU"],
@@ -64,7 +83,7 @@ function loadVmoodProduct(sku) {
       identityColor: data["Color HEX"],
       description: data["Description"],
       folder: data["Image Folder"],
-      imageCount: Number(data["Image Count"]),
+      imageCount,
       delivery: data["Delivery"],
       variants: data.variants
     };
@@ -162,13 +181,13 @@ function displayProduct(product) {
   const variants = product.variants;
   let availableVariantFound = false;
 
-  if (!variants || typeof variants !== "object") {
+  if (!variants || typeof variants !== "object" || Array.isArray(variants)) {
     sizeBox.innerText = "Product options are currently unavailable.";
   } else {
     Object.entries(variants).forEach(([size, data]) => {
-      const stock = Number(data.stock);
-      const oldPrice = Number(data.oldPrice);
-      const newPrice = Number(data.newPrice);
+      const stock = Number(data && data.stock);
+      const oldPrice = Number(data && data.oldPrice);
+      const newPrice = Number(data && data.newPrice);
 
       const validVariant =
         Number.isSafeInteger(stock) &&
@@ -176,7 +195,9 @@ function displayProduct(product) {
         Number.isFinite(oldPrice) &&
         Number.isFinite(newPrice) &&
         oldPrice >= 0 &&
-        newPrice > 0;
+        newPrice > 0 &&
+        Number.isSafeInteger(stock) &&
+        size.length > 0;
 
       const btn = document.createElement("button");
       btn.type = "button";
@@ -340,11 +361,11 @@ function updateProductPrice(oldPrice, newPrice) {
   oldPriceElement.innerText = "₹" + totalOldPrice;
   newPriceElement.innerText = "₹" + totalPrice;
 
-  const discount = oldPrice > 0
+  const discount = oldPrice > newPrice
     ? Math.round(((oldPrice - newPrice) / oldPrice) * 100)
     : 0;
 
-  const saving = (oldPrice - newPrice) * selectedQuantity;
+  const saving = Math.max(0, (oldPrice - newPrice) * selectedQuantity);
 
   offerBadge.innerText =
     discount > 0 ? `${discount}% OFF` : "";
@@ -407,8 +428,9 @@ function loadProductImages(folder, imageCount) {
     !productTrack ||
     !sliderDots ||
     !folder ||
-    !Number.isFinite(imageCount) ||
-    imageCount < 1
+    !Number.isSafeInteger(imageCount) ||
+    imageCount < 1 ||
+    imageCount > 12
   ) return;
 
   productTrack.innerHTML = "";
