@@ -685,3 +685,119 @@ footer > * {
   object-fit: cover;
   display: block;
 }
+
+
+/* ===== VMOOD HOMEPAGE — IVORY THEME =====
+   Scoped to index.html only. Other pages retain their existing theme. */
+body.ivory-home-theme {
+  background: #F6F3EE;
+  color: #111111;
+}
+body.ivory-home-theme .site-header {
+  background: #F6F3EE;
+  border-bottom: 1px solid #DED8CE;
+}
+body.ivory-home-theme .logo img,
+body.ivory-home-theme .footer-logo {
+  filter: brightness(0) saturate(100%);
+}
+body.ivory-home-theme nav a,
+body.ivory-home-theme .menu-btn {
+  color: #111111;
+}
+body.ivory-home-theme section {
+  background: #F6F3EE;
+  border-bottom: 1px solid #DED8CE;
+}
+body.ivory-home-theme h1,
+body.ivory-home-theme h2,
+body.ivory-home-theme h3,
+body.ivory-home-theme .value-line,
+body.ivory-home-theme .value-line span {
+  color: #111111;
+}
+body.ivory-home-theme p {
+  color: #49443D;
+}
+body.ivory-home-theme .eyebrow {
+  color: #788775;
+}
+body.ivory-home-theme .buttons a,
+body.ivory-home-theme .section-btn,
+body.ivory-home-theme .home-product-card .card-link {
+  background: #8A9A87;
+  color: #111111;
+  border: 1px solid #8A9A87;
+}
+body.ivory-home-theme .buttons a:first-child {
+  background: #8A9A87;
+  color: #111111;
+}
+body.ivory-home-theme .home-product-card {
+  background: #FBF9F5;
+  border: 1px solid #DED8CE;
+}
+body.ivory-home-theme .home-product-card h3,
+body.ivory-home-theme .home-product-card .card-price {
+  color: #111111;
+}
+body.ivory-home-theme .home-product-card .card-old-price {
+  color: #817A70;
+}
+body.ivory-home-theme .home-product-card .card-offer {
+  background: #8A9A87;
+  color: #111111;
+}
+body.ivory-home-theme .home-product-card .card-badge {
+  color: #586653;
+  border-color: rgba(138,154,135,.75);
+}
+body.ivory-home-theme .stars {
+  color: #71846D;
+}
+body.ivory-home-theme .stars .half {
+  background: linear-gradient(to right, #71846D 50%, #D8D2C8 50%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+body.ivory-home-theme .review-card {
+  background: #FBF9F5;
+  border: 1px solid #DED8CE;
+}
+body.ivory-home-theme .review-card h3 {
+  color: #111111;
+}
+body.ivory-home-theme .review-card p {
+  color: #49443D;
+}
+body.ivory-home-theme footer {
+  background: #F6F3EE;
+  border-top: 1px solid #DED8CE;
+}
+body.ivory-home-theme .footer-tagline,
+body.ivory-home-theme .footer-social-links a,
+body.ivory-home-theme .footer-action-links a,
+body.ivory-home-theme .footer-location,
+body.ivory-home-theme .footer-copy {
+  color: #33302B;
+}
+body.ivory-home-theme .side-menu {
+  background: #F6F3EE;
+  border-left: 1px solid #8A9A87;
+}
+body.ivory-home-theme .side-menu a,
+body.ivory-home-theme .close-menu {
+  color: #111111;
+}
+body.ivory-home-theme .side-menu a {
+  border-bottom-color: #DED8CE;
+}
+body.ivory-home-theme .menu-overlay {
+  background: rgba(17,17,17,.25);
+}
+body.ivory-home-theme .hero-slider,
+body.ivory-home-theme .world-slider,
+body.ivory-home-theme .why-slider {
+  background: #E8E2D8;
+}
