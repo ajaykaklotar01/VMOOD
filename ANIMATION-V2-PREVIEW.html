@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VMOOD Animation V2 Preview</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #0b0b0b; }
+    #homepagePreview { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; background: #0b0b0b; }
+    #v2Intro { position: fixed; inset: 0; z-index: 99999; pointer-events: none; }
+    #v2Black { position: absolute; inset: 0; background: #0b0b0b; opacity: 1; transition: opacity .32s ease; }
+    #v2Logo {
+      position: absolute;
+      left: 50%; top: 50%;
+      width: 88vw; max-width: 760px; height: auto;
+      object-fit: contain;
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(.96);
+      transition:
+        left 1.38s cubic-bezier(.2,.72,.18,1),
+        top 1.38s cubic-bezier(.2,.72,.18,1),
+        width 1.38s cubic-bezier(.2,.72,.18,1),
+        height 1.38s cubic-bezier(.2,.72,.18,1),
+        opacity .32s ease,
+        transform 1.38s cubic-bezier(.2,.72,.18,1);
+    }
+    #v2Intro.logo-visible #v2Logo { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    #v2Intro.reveal-home #v2Black { opacity: 0; }
+    #v2Intro.merge-logo #v2Logo {
+      left: 16px; top: 8px; width: auto; height: 58px; max-width: none;
+      transform: translate(0, 0) scale(1);
+    }
+    #v2Intro.finished { display: none; }
+    #previewNote {
+      position: fixed; z-index: 100000; right: 10px; bottom: 10px;
+      padding: 6px 9px; border: 1px solid #8A9A87; color: #F6F3EE;
+      background: rgba(11,11,11,.82); font: 12px Arial, sans-serif;
+      letter-spacing: .4px; pointer-events: none;
+    }
+    @media (max-width: 420px) {
+      #v2Intro.merge-logo #v2Logo { left: 16px; top: 8px; height: 58px; }
+    }
+  </style>
+</head>
+<body>
+  <iframe id="homepagePreview" src="index.html" title="VMOOD homepage preview"></iframe>
+  <div id="v2Intro" aria-hidden="true">
+    <div id="v2Black"></div>
+    <img id="v2Logo" src="VMOODICON.png" alt="">
+  </div>
+  <div id="previewNote">V2 PREVIEW ONLY · V1 LIVE UNCHANGED</div>
+  <script>
+    const intro = document.getElementById("v2Intro");
+    const frame = document.getElementById("homepagePreview");
+
+    function startV2Preview() {
+      try {
+        const frameLogo = frame.contentDocument.querySelector(".site-header .logo img");
+        if (frameLogo) frameLogo.style.visibility = "hidden";
+      } catch (error) {
+        // The preview remains usable even if the homepage has not finished loading.
+      }
+
+      requestAnimationFrame(() => {
+        intro.classList.add("logo-visible");
+        setTimeout(() => intro.classList.add("reveal-home"), 520);
+        setTimeout(() => intro.classList.add("merge-logo"), 850);
+        setTimeout(() => {
+          try {
+            const frameLogo = frame.contentDocument.querySelector(".site-header .logo img");
+            if (frameLogo) frameLogo.style.visibility = "visible";
+          } catch (error) {}
+          intro.classList.add("finished");
+          document.getElementById("previewNote").style.display = "none";
+          document.documentElement.style.overflow = "auto";
+          document.body.style.overflow = "auto";
+        }, 2400);
+      });
+    }
+
+    frame.addEventListener("load", startV2Preview, { once: true });
+  </script>
+</body>
+</html>
