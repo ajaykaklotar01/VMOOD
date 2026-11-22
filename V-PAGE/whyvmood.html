@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WHY VMOOD | VMOOD</title>
+  <link rel="stylesheet" href="whyvmood.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo">
+    <img src="../VMOODICON.png" alt="VMOOD Logo">
+  </div>
+
+  <nav>
+    <a href="../index.html">Home</a>
+  </nav>
+</header>
+
+<section class="why-page">
+  <h1>WHY VMOOD</h1>
+<p>Real Life Luxury. Comfort, Trust and Experience.</p>
+
+<div class="why-slideshow">
+  <div class="why-gallery">
+  <div class="why-slide">
+      <img src="MV-PHOTO/MV1.png" alt="VERO Promise">
+      <h2>Vmood Promise</h2>
+      <p>Always here. Always caring.</p>
+  </div>
+  
+    <div class="vero-item">
+  <img src="MV-PHOTO/MV2.png" alt="Meet VERO">
+  <h2>The Heart Behind Every VMOOD Experience</h2>
+  <p>Comfort. Trust. Guidance.</p>
+    </div>
+
+    <div class="vero-item">
+      <img src="MV-PHOTO/MV3.png" alt="Everyday Comfort">
+      <h2>Comfort Is A Feeling</h2>
+      <p> not only a product.</p>
+    </div>
+
+    <div class="vero-item">
+      <img src="MV-PHOTO/MV4.png" alt="Real Life Luxury">
+      <h2>Luxury That Belongs In Real Life</h2>
+      <p>Comfort. Trust. Experience. Every day.</p>
+    </div>
+  </div>
+</div>
+
+  
+  <a class="back-btn" href="../index.html">BACK TO HOME</a>
+</section>
+
+<script>
+(() => {
+  const track = document.querySelector(".why-gallery");
+  if (!track) return;
+  const first = track.querySelector("img");
+  track.appendChild(first.cloneNode(true));
+  const count = track.querySelectorAll("img").length - 1;
+  let index = 0;
+  let resetting = false;
+  track.addEventListener("transitionend", (event) => {
+    if (event.propertyName !== "transform" || !resetting) return;
+    track.style.transition = "none";
+    track.style.transform = "translateX(0)";
+    index = 0;
+    resetting = false;
+  });
+  setInterval(() => {
+    if (resetting) return;
+    index++;
+    track.style.transition = "transform 1s ease-in-out";
+    track.style.transform = `translateX(-${index * 100}%)`;
+    if (index === count) resetting = true;
+  }, 3000);
+})();
+</script>
+</body>
+</html>
