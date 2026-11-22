@@ -1,45 +1,29 @@
-// HERO INFINITE SLIDESHOW
-const heroTrack = document.querySelector(".hero-track");
-const totalHeroSlides = document.querySelectorAll(".hero-track img").length;
-let currentHeroSlide = 0;
+// HOMEPAGE SLIDESHOWS — 3 SECONDS PER PHOTO, 0.5 SECOND TRANSITION
+function startHomepageSlideshow(trackSelector) {
+  document.querySelectorAll(trackSelector).forEach((track) => {
+    const totalSlides = track.querySelectorAll("img").length;
+    let currentSlide = 0;
 
-setInterval(() => {
-if (!heroTrack) return;
+    setInterval(() => {
+      currentSlide++;
 
-currentHeroSlide++;
+      track.style.transition = "transform 0.5s ease-in-out";
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
 
-heroTrack.style.transition = "transform 1s ease-in-out";
-heroTrack.style.transform = `translateX(-${currentHeroSlide * 100}%)`;
-
-if (currentHeroSlide === totalHeroSlides) {
-setTimeout(() => {
-heroTrack.style.transition = "none";
-heroTrack.style.transform = "translateX(0)";
-currentHeroSlide = 0;
-}, 500);
+      if (currentSlide === totalSlides - 1) {
+        setTimeout(() => {
+          track.style.transition = "none";
+          track.style.transform = "translateX(0)";
+          currentSlide = 0;
+        }, 500);
+      }
+    }, 3000);
+  });
 }
-}, 3500);
 
-// VMOOD WORLD + WHY VMOOD INFINITE SLIDESHOWS
-document.querySelectorAll(".world-track").forEach((track) => {
-  const totalSlides = track.querySelectorAll("img").length;
-  let currentSlide = 0;
-
-  setInterval(() => {
-    currentSlide++;
-
-    track.style.transition = "transform 1s ease-in-out";
-    track.style.transform = `translateX(-${currentSlide * 100}%)`;
-
-    if (currentSlide === totalSlides) {
-      setTimeout(() => {
-        track.style.transition = "none";
-        track.style.transform = "translateX(0)";
-        currentSlide = 0;
-      }, 500);
-    }
-  }, 3500);
-});
+startHomepageSlideshow(".hero-track");
+startHomepageSlideshow(".world-track");
+startHomepageSlideshow(".why-track");
 
 // PREMIUM SCROLL ANIMATION
 const revealElements = document.querySelectorAll(
