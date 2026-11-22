@@ -23,6 +23,7 @@ async function vmoodApiRequest(payload) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 20000);
   let response;
+  let text;
 
   try {
     response = await fetch(VMOOD_API_URL, {
@@ -31,6 +32,7 @@ async function vmoodApiRequest(payload) {
       body: JSON.stringify(payload),
       signal: controller.signal
     });
+    text = await response.text();
   } catch (error) {
     if (error.name === "AbortError") {
       throw new Error("The VMOOD server took too long to respond. Please check your connection and try again.");
@@ -39,8 +41,6 @@ async function vmoodApiRequest(payload) {
   } finally {
     clearTimeout(timeout);
   }
-
-  const text = await response.text();
   let data;
 
   try {
