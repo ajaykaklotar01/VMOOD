@@ -201,7 +201,8 @@ function displayProduct(product) {
         selectedSize = size;
         selectedPrice = newPrice;
         selectedOldPrice = oldPrice;
-        selectedStock = stock - 3;
+        // Keep the product-page quantity limit aligned with checkout's maximum of 20.
+        selectedStock = Math.min(stock - 3, 20);
         selectedQuantity = 1;
 
         updateProductPrice(oldPrice, newPrice);
