@@ -38,9 +38,9 @@ body {
   transform: translateY(5px);
 }
 
-/* Header logo fades in at its original size after the V1 full-screen intro. */
+/* Slow, clean header-logo fade after the V1 full-screen intro. */
 .site-header .logo.vmood-logo-reveal img {
-  animation: vmoodHeaderLogoReveal 1.5s ease-in-out both;
+  animation: vmoodHeaderLogoReveal 3.5s linear both;
 }
 
 @keyframes vmoodHeaderLogoReveal {
