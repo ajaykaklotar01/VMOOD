@@ -362,10 +362,13 @@ function showProductError(title, message) {
   const detail = document.querySelector(".product-detail");
 
   if (detail) {
-    detail.innerHTML = `
-      <h1>${title}</h1>
-      <p>${message}</p>
-    `;
+    const heading = document.createElement("h1");
+    heading.textContent = title;
+
+    const paragraph = document.createElement("p");
+    paragraph.textContent = message;
+
+    detail.replaceChildren(heading, paragraph);
   }
 }
 
