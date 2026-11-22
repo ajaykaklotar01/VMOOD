@@ -20,27 +20,26 @@ currentHeroSlide = 0;
 }
 }, 3500);
 
-// VMOOD WORLD INFINITE SLIDESHOW
-const worldTrack = document.querySelector(".world-track");
-const totalWorldSlides = document.querySelectorAll(".world-track img").length;
-let currentWorldSlide = 0;
+// VMOOD WORLD + WHY VMOOD INFINITE SLIDESHOWS
+document.querySelectorAll(".world-track").forEach((track) => {
+  const totalSlides = track.querySelectorAll("img").length;
+  let currentSlide = 0;
 
-setInterval(() => {
-if (!worldTrack) return;
+  setInterval(() => {
+    currentSlide++;
 
-currentWorldSlide++;
+    track.style.transition = "transform 1s ease-in-out";
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
 
-worldTrack.style.transition = "transform 1s ease-in-out";
-worldTrack.style.transform = `translateX(-${currentWorldSlide * 100}%)`;
-
-if (currentWorldSlide === totalWorldSlides) {
-setTimeout(() => {
-worldTrack.style.transition = "none";
-worldTrack.style.transform = "translateX(0)";
-currentWorldSlide = 0;
-}, 500);
-}
-}, 3500);
+    if (currentSlide === totalSlides) {
+      setTimeout(() => {
+        track.style.transition = "none";
+        track.style.transform = "translateX(0)";
+        currentSlide = 0;
+      }, 500);
+    }
+  }, 3500);
+});
 
 // PREMIUM SCROLL ANIMATION
 const revealElements = document.querySelectorAll(
